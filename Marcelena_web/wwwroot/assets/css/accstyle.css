@@ -1,0 +1,201 @@
+﻿.reviewinput {
+    border-color: #556270;
+    height: 200px;
+    width: 600px;
+}
+
+.acc-login {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    align-content: center;
+}
+.btn-add {
+    min-width: 100px;
+    height: 40px;
+    padding: 0 15px;
+    background: #d9232d;
+    white-space: nowrap;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    transition: all .2s ease-out, color .2s ease-out;
+    border: 0;
+    cursor: pointer;
+    font-weight: 400;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+    z-index: 0;
+    position: relative;
+}
+.acc-login .container{
+    max-height: 730px;
+}
+.acc-body .fst-sctn {
+    width: 650px;
+    height: 400px;
+    background-color: #f9f9f9;
+    background: #fff;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 15px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.input-div {
+        height: 150px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 7% 93%;
+        margin: 25px 0;
+        padding: 5px 0;
+        border-bottom: 2px solid #d9d9d9;
+    }
+ .input-div > div {
+            position: relative;
+            height: 150px;
+            width: 650px;
+        }
+
+ .input-div > div > h5 {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 18px;
+        transition: .3s;
+    }
+.input-div:before, .input-div:after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        width: 0%;
+        height: 2px;
+        background-color: #d9232d;
+        transition: .4s;
+    }
+
+.input-div:before {
+        right: 50%;
+    }
+.input-div:after {
+        left: 50%;
+    }
+    .input-div.focus:before, .input-div.focus:after {
+        width: 50%;
+    }
+
+    .input-div.focus > div > h5 {
+        top: -5px;
+        font-size: 15px;
+    }
+
+    .input-div.focus > .i > i {
+        color: #d9232d;
+    }
+.input-div > div > textarea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        background: none;
+        padding: 0.5rem 0.7rem;
+        font-size: 1.2rem;
+        color: #555;
+        font-family: 'poppins', sans-serif;
+    }
+.wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    z-index: -1;
+}
+.img img {
+    width: 500px;
+}
+.img {
+    padding-left: -20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.acc-body .avatar {
+    width: 100px;
+    height: 120px;
+    padding-bottom: 20px;
+}
+.acc-body .containe {
+    position: center;
+    height: 730px;
+    display: grid;
+    align-content: center;
+    text-align: center;
+}
+.acc-body .section-titl {
+    align-content: center;
+    display: inline;
+    min-width: 400px;
+}
+.acc-body .containe .section-titl h5 {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0;
+    line-height: 1px;
+    margin: 0 0 5px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #aaaaaa;
+    font-family: "Poppins", sans-serif;
+    height: 15px;
+}
+.acc-body .containe .section-titl h4 {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0 0 5px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #aaaaaa;
+    font-family: "Poppins", sans-serif;
+    height: 30px;
+    color: #556270;
+}
+
+
+.acc-body .containe .section-titl a {
+    width: 250px;
+    font-size: 21px;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #aaaaaa;
+    font-family: "Poppins", sans-serif;
+    height: 25px;
+    color: #556270;
+}
+.acc-body .containe .section-titl p {
+    margin: 30px 0 0 0;
+    height: 25px;
+    padding-bottom: 0px;
+}
+.acc-body .containe .section-titl .change-pass p {
+    margin: 5px 0 15px 0;
+}
+.acc-body p:hover, .acc-body .active > p, .acc-body li:hover > p {
+    color: #d9232d;
+}
+.acc-body .containe .section-titl p a:hover, .acc-body .containe .section-titl p .active > a, .acc-body .containe .section-titl p li:hover > a {
+    color: #d9232d;
+}

@@ -1,0 +1,87 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_AccLayout.cshtml";
+}
+<html>
+<head>
+    <link href="/assets/css/loginstyle.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="body-login">
+        <img class="wave" src="/assets/img/vawe.png">
+        <div style="text-align:center">
+            <div class="containe">
+                <div class="login-content" style=" max-width:800px">
+                    <div asp-validation-summary="All" class="text-danger" style=" max-width:380px"></div>
+                    <form name="contact-form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                        <div class="input-div one">
+                            <div class="i">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Username</h5>
+                                <input asp-for="Input.NormalizedUserName" type="text"class="input">
+                                <span asp-validation-for="Input.NormalizedUserName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="input-div one">
+                            <div class="i">
+                                <i class="fas fa-envelope-open"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Email</h5>
+                                <input asp-for="Input.Email" type="text" class="input">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                            <div class="div">
+                                <h5>Role</h5>
+                                <select name="role"> 
+								<option value="Buyer">Buyer</option>
+                                <option value="Seller">Seller</option>
+                                
+                                </select>
+                            
+                        </div>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Password</h5>
+                                <input asp-for="Input.Password" type="password" class="input">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Confirm Password</h5>
+                                <input asp-for="Input.ConfirmPassword" type="password" class="input">
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-login">Register</button>
+                        </div>
+                        <a asp-page="/Account/Login">Already have an account? Log in</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="/assets/js/loginmain.js"></script>
+    </div>
+</body>
+</html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

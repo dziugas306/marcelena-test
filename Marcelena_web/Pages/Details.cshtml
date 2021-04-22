@@ -1,0 +1,345 @@
+﻿@page "{id}"
+@model Marcelena_web.Pages.DetailsModel
+@{ Layout = "/Pages/Shared/_Layout.cshtml";
+    var photoPath = "~/images/noimage.jpg";
+    var defaultPath = "~/images/";
+}
+@using Marcelena_web.Domain.Entitites
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://kit.fontawesome.com/813e2f98ee.js" crossorigin="anonymous"></script>
+    <script src="~/js/popper.min.js"></script>
+</head>
+<body>
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Shop</h2>
+                    <ol>
+                        <li><a asp-page="/Home">Home</a></li>
+                        <li><a asp-page="/Search/Index">Search</a></li>
+                        <li>Shop</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <!-- ======= Shop info ======= -->
+
+        <form method="post">
+            <input class="form-control" type="hidden" asp-for="Shop.PhotoPaths">
+            @for (int i = 0; i < Model.Shop.PhotoPaths.Count; i++)
+            {
+                <input class="form-control" type="hidden" asp-for="Shop.PhotoPaths[i].PhotoPath">
+                <input class="form-control" type="hidden" asp-for="Shop.PhotoPaths[i]._id">
+            }
+            <input class="form-control" type="hidden" asp-for="Shop.Reviews">
+            @for (int i = 0; i < Model.Shop.Reviews.Count; i++)
+            {
+                <input class="form-control" type="hidden" asp-for="Shop.Reviews[i].Text">
+                <input class="form-control" type="hidden" asp-for="Shop.Reviews[i].Time">
+                <input class="form-control" type="hidden" asp-for="Shop.Reviews[i].userId">
+                <input class="form-control" type="hidden" asp-for="Shop.Reviews[i]._id">
+
+            }
+            <input class="form-control" type="hidden" asp-for="Shop._id">
+            <input class="form-control" type="hidden" asp-for="Shop.Coordinate.Latitude">
+            <input class="form-control" type="hidden" asp-for="Shop.Coordinate.Longtitude">
+            @for (int i = 0; i < Model.Shop.Products.Count; i++)
+            {
+                <input class="form-control" type="hidden" asp-for="Shop.Products[i].ProductType" placeholder="Product type">
+                <span asp-validation-for="Shop.Products[i].ProductType" class="text-danger"></span>
+                <input class="form-control" type="hidden" asp-for="Shop.Products[i].ProductPrice" placeholder="Product price">
+                <span asp-validation-for="Shop.Products[i].ProductPrice" class="text-danger"></span>
+            }
+            <div class="container">
+                <div class="row m-3" style=" position: relative;height: 130px;">
+                    <div id="pricing" class="pricing" style="        position: absolute;top: 20%;">
+                        <div class="section-title">
+                            <p>@Model.Shop.ShopName</p>
+                            <h4>@Model.Shop.ShopAddress</h4>
+                            @if (Model.EnableDistance)
+                            {
+                                <h4>Distance: @Model.Distance km</h4>
+                            }
+                        </div>
+                    </div>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div class="input-field" style="position: absolute; left: 80%;top: 0; width:200px;">
+                            <div class="group-btn">
+                                <div>
+                                    <p>
+                                        <i class="fas fa-edit"></i>
+                                        <a href="~/Edit/@Model.Shop._id">Edit shop</a>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        <i class="fas fa-times"></i>
+                                        <a type="button" data-toggle="modal" data-target="#removeModal">Remove shop</a>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        <i class="fas fa-pencil-alt"></i>
+                                        <a href="~/AddReview/@Model.Shop._id">Leave a review</a>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        <span role="checkbox" id="checkboxFavorites">
+                                            <i class="fa fa-heart-o" aria-hidden="true">
+                                                <a>Add to favorites</a>
+                                            </i>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- ======= Photos ======= -->
+            <div class="container">
+                <div class="row">
+                    @for (int i = 0; i < Model.Shop.PhotoPaths.Count; i++)
+                    {
+                        <div class="column">
+                            <img class="imageThumbnail hover-shadow cursor" src="@defaultPath@Model.Shop.PhotoPaths[i].PhotoPath" asp-append-version="true" style="width:100%; max-height: 600px" onclick="openModal();currentSlide(1)">
+                        </div>
+                    }
+                </div>
+                <div id="myModal" class="modal-photos">
+                    <span class="close cursor" onclick="closeModal()">&times;</span>
+                    <div class="modal-content-photos">
+                        @for (int i = 0; i < Model.Shop.PhotoPaths.Count; i++)
+                        {
+                            <div class="mySlides">
+                                <div class="numbertext">@(i+1) / @Model.Shop.PhotoPaths.Count</div>
+                                <img class="imageThumbnail" src="@defaultPath@Model.Shop.PhotoPaths[i].PhotoPath" asp-append-version="true">
+                            </div>
+                        }
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ======= Products ======= -->
+            <div class="container">
+                <div class="pricing">
+                    <div class="container">
+                        <div class="section-title">
+                            <h2></h2>
+                            <p>Products</p>
+                        </div>
+                    </div>
+                </div>
+                <table class="table" style="margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-names">Product</th>
+                            <th scope="col" class="table-names">Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Shop.Products)
+                        {
+                            <tr>
+                                <td class="table-body">@item.ProductType</td>
+                                <td class="table-body">@item.ProductPrice</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- ======= Delete shop ======= -->
+            <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Remove shop</h5>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to remove this shop?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" asp-page-handler="Remove" asp-route-shopid="@Model.Shop._id" class="btn btn-danger">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ======= Location ======= -->
+            <section id="pricing" class="pricing">
+                <div class="container">
+                    <div class="section-title">
+                        <h2></h2>
+                        <p>Location</p>
+                    </div>
+                    <iframe width="1100"
+                            height="500"
+                            frameborder="0" style="border:0"
+                            src="@Model.ApiUrl">
+                    </iframe>
+                </div>
+            </section>
+            <!-- ======= Reviews ======= -->
+            <section id="testimonials" class="testimonials">
+                <div class="container">
+                    <div class="pricing">
+                        <div class="container">
+                            <div class="section-title">
+                                <h2></h2>
+                                <p>Reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @for (int i = 0; i < Model.Shop.Reviews.Count; i++)
+                        {
+                            <div class="col-lg-6 img-wrap" style="padding-bottom:25px">
+                                @if (@Model.currentUser != null && @Model.currentUser.Id == @Model.Shop.Reviews[i].userId)
+                                {
+                                    <button type="submit" class="close AClass" asp-page-handler="Delete" asp-route-id="@Model.Shop._id" asp-route-reviewId="@Model.Shop.Reviews[i]._id" >
+                                        <span>&times;</span>
+                                    </button>
+                                }
+                                <div class="testimonial-item">
+                                    <h3>@Model.userNames[i]</h3>
+                                    <h4>@Model.Shop.Reviews[i].Time</h4>
+                                    <p>
+                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                        @Model.Shop.Reviews[i].Text
+                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+    <style>
+        .img-wrap {
+            position: relative !important;
+        }
+
+            .img-wrap .close {
+                position: relative !important;
+                top: 2px !important;
+                right: 2px !important;
+                z-index: 100 !important;
+            }
+    </style>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/venobox/venobox.min.js"></script>
+    <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        $(".heart.fa").click(function () {
+            $(this).toggleClass("fa-heart fa-heart-o");
+        });
+    </script>
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+        var slideIndex = 1;
+        showSlides(slideIndex);
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }</script>
+    <script>
+        window.onload = function () {
+            if (@Model.IsFavorite.ToString().ToLower()) {
+                $("#checkboxFavorites").html('<i class="fa fa-heart" aria-hidden="true"><a>Added to favorites</a></i>');
+                $("#checkboxFavorites").addClass("liked");
+            }
+            else {
+                $("#checkboxFavorites").html('<i class="fa fa-heart-o" aria-hidden="true"><a>Add to favorites</a></i>');
+                $("#checkboxFavorites").removeClass("liked");
+            }
+        }
+
+        $(document).ready(function () {
+
+            $("#checkboxFavorites").click(function () {
+                if ($("#checkboxFavorites").hasClass("liked")) {
+                    $("#checkboxFavorites").html('<i class="fa fa-heart-o" aria-hidden="true"><a>Add to favorites</a></i>');
+                    $("#checkboxFavorites").removeClass("liked");
+                } else {
+                    $("#checkboxFavorites").html('<i class="fa fa-heart" aria-hidden="true"><a>Added to favorites</a></i>');
+                    $("#checkboxFavorites").addClass("liked");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<script>
+    $(document).ready(function (e) {
+        //var checkBox = $("#checkBOX").val();
+        var shopId = @Model.Shop._id;
+        $("#checkboxFavorites").on("click", (function (e) {
+            //console.log(checkBox);
+            console.log(shopId);
+        e.preventDefault();
+        $.ajax({
+            cache: false,
+            type: "POST",
+           // url: '@Url.Action("AddFavAsync", "Details", new { shopId = Model.Shop._id })',
+            url: "/Details/@Model.Shop._id?handler=AddFavAsync",
+            data: {
+                //checkBox: checkBox,
+                shopId: shopId
+            },
+            success: function () {
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+            }
+        });
+    }));
+    })
+</script>

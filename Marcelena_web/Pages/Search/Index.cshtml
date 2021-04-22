@@ -1,0 +1,205 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Search";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<html>
+<head>
+
+    <link href="~/assets/css/indexstyle.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Search</h2>
+                <ol>
+                    <li><a asp-page="/Home">Home</a></li>
+                    <li>Search</li>
+                </ol>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <div class="s010">
+        <form method="get">
+            <div >
+                <div class="inner-form">
+                    <div class="basic-search">
+                        <div class="input-field">
+                            <input id="search" asp-for="Query" type="text" placeholder="Type Keywords"  />
+                            <div class="icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="advance-search">
+                        <span class="desc">ADVANCED SEARCH</span>
+                        <div id="inputForAll"  class="row">
+                            <div class="input-field">
+                                <div class="input-select">
+                                    <select class="form-control" id="orders" name="orders">
+                                        <option placeholder="" value="0">Sort:</option>
+                                        <option value="1">Shop Name</option>
+                                        <option value="2">Shop address</option>
+                                        <option value="3">Distance to shop</option>
+                                        <option value="4">Product price</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <div class="input-select">
+                                    <select class="form-control" id="filterBY" name="filterBY">
+                                        <option placeholder="" value="0">Filter:</option>
+                                        <option value="1">Product price</option>
+                                        <option value="2">Distance to shop</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <div class="input-select">
+                                    <select class="form-control" id="filterEQ" name="filterEQ">
+                                        <option placeholder="" value="0"> </option>
+                                        <option value="1"><</option>
+                                        <option value="2">></option>
+                                        <option value="3">=</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-field">
+                                <div class="input-select">
+                                    <div class=" choices">
+                                        <div class=".nmbr-flt ">
+                                        <input class="form-control" type="text" id="filterNumber" name="filterNumber" placeholder="Number" pattern="^[0-9]+([\\.,][0-9][0-9]?)?$">
+                                        </div>
+                                    </div>
+
+                                    </div>                                        
+                                </div>
+                        </div>
+                        <div class="row third">
+                            <div class="input-field">
+                                <div class="result-count"></div>
+                                    <div class="group-btn">
+                                        <button class="btn-delete" id="delete">RESET</button>
+                                        <button class="btn-search">SEARCH</button>                                        
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </form>
+    </div>
+    <script src="~/js/extention/choices.js"></script>
+    <script>const customSelects = document.querySelectorAll("select");
+        const deleteBtn = document.getElementById('delete')
+        const choices = new Choices('select',
+            {
+                searchEnabled: false,
+                itemSelectText: '',
+                removeItemButton: true,
+            });
+        for (let i = 0; i < customSelects.length; i++) {
+            customSelects[i].addEventListener('addItem', function (event) {
+                if (event.detail.value) {
+                    let parent = this.parentNode.parentNode
+                    parent.classList.add('valid')
+                    parent.classList.remove('invalid')
+                }
+                else {
+                    let parent = this.parentNode.parentNode
+                    parent.classList.add('invalid')
+                    parent.classList.remove('valid')
+                }
+            }, false);
+        }
+        deleteBtn.addEventListener("click", function (e) {
+            e.preventDefault()
+            const deleteAll = document.querySelectorAll('.choices__button')
+            for (let i = 0; i < deleteAll.length; i++) {
+                deleteAll[i].click();
+            }
+        });</script>
+
+<div class="s020">
+    <div class="inner-form">
+        <div class="advance-search">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-names">
+                            Shop name
+                        </th>
+                        <th class="table-names">
+                            Shop address
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="orderInfo">
+                    @foreach (var item in Model.Shop)
+                    {
+                        <tr>
+                            <td class="table-body">
+                                <a href="Details/@item._id">@Html.DisplayFor(modelItem => item.ShopName)</a>
+                            </td>
+                            <td class="table-body">
+                                @{string address = @item.ShopAddress.ToString();}
+                                @address
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+
+    <script>
+    $("#inputForAll").on("change", (function () {
+
+        var conceptName = $("#orders").find(":selected").val();
+        var filterBY = $("#filterBY").find(":selected").val();
+        var filterEQ = $("#filterEQ").find(":selected").val();
+        var filterNumber = $("#filterNumber").val();
+        var query = $("#search").val();
+
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "Search/Index?handler=OrderPartial",
+            data: {
+                orderby: conceptName,
+                filterby: filterBY,
+                filterEQ: filterEQ,
+                number: filterNumber,
+                query: query
+            },
+            success: function (data) {
+                var returnedData = JSON.parse(data);
+                //console.log(returnedData[0].ShopName);
+                console.log(data);
+                $("#orderInfo").empty('');
+                console.log(data);
+                json = JSON.parse(data);
+                for (var i in json) {
+                    var row = $('<tr>');
+                    row.append('<th class="table-body"> <a href="Details/' + json[i]._id + '">' + json[i].ShopName + '</a></th>');
+                    row.append($('<th class="table-body" id=' + json[i]._id + '>').html(json[i].ShopAddress.StreetName + " " + json[i].ShopAddress.StreetNumber + " " + json[i].ShopAddress.ApartmentNumber + ", " + json[i].ShopAddress.CityName + ", " + json[i].ShopAddress.CountryName));
+                    $('</th>');
+                    $('#orderInfo').append(row);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+            }
+        });
+    }));</script>

@@ -1,0 +1,29 @@
+﻿@model Int32
+    <head>
+        <link href="/assets/css/placestyle.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <div class="row partial-products">
+        <div class="col-sm">
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-carrot"></i>
+                </div>
+                <div class="div">
+                    <input type="text" class="input" name="Shop.Products[@Model.ToString()].ProductType">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-euro-sign"></i>
+                </div>
+                <div class="div">
+                    <input type="text" class="input" name="Shop.Products[@Model.ToString()].ProductPrice">
+                </div>
+            </div>
+        </div>
+    </div>

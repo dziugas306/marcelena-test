@@ -1,0 +1,50 @@
+﻿@page
+@model ProfileModel
+@{
+    Layout = "~/Areas/Identity/Pages/_AccLayout.cshtml";
+}
+<html>
+<head>
+    <link href="/assets/css/accstyle.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <img class="wave" src="/assets/img/vawe.png">
+
+    <div class="acc-body">
+        <div class="containe">
+                <div class="fst-sctn">
+                    <div class="section-titl">
+                        <img class="avatar" src="/assets/img/avat.png">
+                        <h4>@Model.currentUser.UserName</h4>
+                        <h4>@Model.currentUser.Email</h4>
+                        @if (@Model.currentUser.UserAddress == null)
+                        {
+                            <p>
+                                <i class="fas fa-map-pin"></i>
+                                <a asp-area="Identity" asp-page="/Account/UserAddress" style="width: 100%">Add address</a>
+                                <p>@Model.currentUser.Role</p>
+                            </p>
+                        }
+                        else
+                        {
+                            <h4>@Model.currentUser.UserAddress</h4>
+                            <p>
+                                <i class="fas fa-map-pin"></i>
+                                <a asp-area="Identity" asp-page="/Account/UserAddress" style="width: 100%">Change address</a>
+                            </p>
+                        }
+                        <div class="change-pass">
+                            <p>
+                                <i class="fas fa-lock"></i>
+                                <a asp-area="Identity" asp-page="/Account/ChangePassword">Change password</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>

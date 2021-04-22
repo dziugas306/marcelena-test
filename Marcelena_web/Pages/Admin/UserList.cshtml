@@ -1,0 +1,119 @@
+﻿@page 
+
+@model AdminModel
+@{
+    ViewData["Title"] = "Admin";
+    
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<html>
+<head>
+
+    <link href="~/assets/css/indexstyle.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Search</h2>
+                <ol>
+                    <li><a asp-page="/Home">Home</a></li>
+                    <li>Search</li>
+                </ol>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+      
+
+
+<div class="s020">
+    <div class="inner-form">
+        <div class="advance-search">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-names">
+                            Shop name
+                        </th>
+                        <th class="table-names">
+                            Shop address
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="orderInfo">
+                    @foreach (var item in Model.Shop)
+                    {
+                        <tr>
+                            <td class="table-body">
+                                <a  href="//localhost:5001/Details/@item._id">@Html.DisplayFor(modelItem => item.ShopName)</a>
+                            </td>
+                            <td class="table-body">
+                                @{string address = @item.ShopAddress.ToString();}
+                                @address
+                            </td>
+                             <td class="table-body">
+                                
+                                <form asp-page-handler="delete" method="post">
+                                 <input type="hidden" name="id" value="@item._id" />
+                                    <button  type="submit" class="btn btn-default">Delete</button>
+                                   
+                                </form>
+                            </td>
+            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <div class="s020">
+    <div class="inner-form">
+        <div class="advance-search">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-names">
+                            Username
+                        </th>
+                        <th class="table-names">
+                            Role
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="userInfo">
+                    
+                    @foreach (var item in Model.Users)
+                    {
+                        <tr>
+                            <td class="table-body">
+                                <a >@item.UserName</a>
+                            </td>
+                            <td class="table-body">
+                                @item.Role
+                                
+                            </td>
+                             <td class="table-body">
+                                
+                                <form asp-page-handler="edit" method="post">
+                                 <input type="hidden" name="id" value="@item.UserName" />
+                                    <button  type="submit" class="btn btn-default">Delete</button>
+                                   
+                                </form>
+                            </td>
+            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+</body>
+</html>
+

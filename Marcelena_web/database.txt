@@ -1,0 +1,31 @@
+﻿UAB ABUOLEI,basanviciaus g. 13, Vilnius, Lietuva,apples-14 mushrooms-51
+UAB GRYBAI,kestucio g. 21, Vilnius, Lietuva,flowers-21 mushrooms-49
+UAB GELES,misko g. 25, Vilnius, Lietuva,flowers-19 fruits-15
+UAB DARZOVES,upes g. 31, Vilnius, Lietuva,vegetables-31
+UAB UOGOS,darzo g. 1, Vilnius, Lietuva,fruits-31 berries-32
+UAB Viskas,kita g. 31, Vilnius, Lietuva,flowers-100 berries-10 fruits-31
+UAB Sviestainis, Ukmerges g. 12 , Vilnius, Lietuva,riesutai-11 grybai-17 obuoliai-5
+UAB Cesma, Kirtimu g. 57A , Vilnius, Lietuva,obuoliai-6
+UAB Augma, V. A. Graiciuno g. 2B , Vilnius, Lietuva,kriauses-8
+UAB Brolimo, Kirtimu g. 21, Vilnius, Lietuva,kopustai-32
+UAB Supleinas, Zalgirio g. 137-123, Vilnius, Lietuva,arbuzai-7
+UAB Dreana, Laisves pr. 115A-1, Vilnius, Lietuva,melionai-9
+UAB Sliekuva, Erfurto g. 26-8, Vilnius, Lietuva,trasos-10
+UAB Fruit Era, Pylimo g. 44-7, Vilnius, Lietuva,bananai-2 apelsinai-3 kiviai-4 arbuzai-6
+UAB Bartana, Ramybes g. 4-70, Vilnius, Lietuva,bananai-3
+UAB AGROCO, Gvazdiku Sodu 11-oji g. 25, Vilnius, Lietuva,trasos-21
+UAB Mazas medis, Sausio 13-osios g. 31-227, Vilnius, Lietuva,persikai-31
+UAB Rolando darzoves, Salomejos Neries g. 107-188, Vilnius, Lietuva,obuoliai-23
+UAB Darzoviu gausa, Kirtimu g. 57A, Vilnius, Lietuva,salotos-31
+UAB Eurohorecana, Kirtimu g. 61, Vilnius, Lietuva,eukaliptas-3
+UAB ManoNamai, pasto g.,Vilnius,Lietuva,Apelsinai-5 Mandarinai-45 Agurkai-2 Bananai-15 Pomidorai-6
+UAB KATU, zirmunu g. - 5A, Vilnius, Lietuva,Bananai-2
+UAB AnotherTest, liokaju g. - 5, Vilnius, Lietuva,Apelsinai-2
+UAB nuTAip, zitu g., Vilnius, Lietuva,Apelsinai-2 Apelsinai-1
+UAB KKK, subaciasu g. - 5A, Vilnius, Lietuva,obuolys-10 bananas-2
+Uab DONATODARZOVES, siauliu g. - 5, Vilnius, Lietuva,bananai-2 Apelsinus-5
+UAB, gatve g., Vilnius, Lietuva,ananasai-5
+UAB hello, vilnius, Vilnius, Lietuva,ananasas-5
+UAB apapa, alytaus g., Vilnius, Lietuva,kriauses-5
+UAB makaka, Kauno g. - 5, Vilnius, Lietuva,bananai-1
+UAB ka tu, Vilniasu g., Vilnisu, Lietuva,aa-12

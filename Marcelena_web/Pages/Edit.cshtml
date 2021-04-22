@@ -1,0 +1,162 @@
+@page "{id}"
+@model Marcelena_web.Pages.EditModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    var photoPath = "~/images/noimage.jpg";
+    var defaultPath = "~/images/";
+}
+<head>
+    <link href="/assets/css/placestyle.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Edit shop</h2>
+            <ol>
+                <li><a asp-page="/Home">Home</a></li>
+                <li><a asp-page="/Search/Index">Search</a></li>
+                <li><a href="~/Details/@Model.Shop._id">Shop</a></li>
+                <li><a>Edit shop</a></li>
+            </ol>
+        </div>
+    </div>
+</section><!-- End Breadcrumbs -->
+<div class="container">
+    <div class="row m-3" style="position:relative">
+        <div id="pricing" class="pricing">
+            <div class="section-title">
+                <p>@Model.Shop.ShopName</p>
+                <h4>@Model.Shop.ShopAddress</h4>
+            </div>
+        </div>
+        <div class="input-field" style="position: absolute; left: 80%;top: -5px; width:150px;">
+            <div class="group-btn">
+                <div>
+                    <p>
+                        <i class="fas fa-carrot" style="font-size: 17px"></i>
+                        <a href="~/Edit/Products/@Model.Shop._id" style="font-size: 17px">Edit products</a>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <i class="far fa-images" style="font-size: 17px"></i>
+                        <a href="~/Edit/Photos/@Model.Shop._id" style="font-size: 17px">Edit photos</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-place" style="text-align:center; height:850px">
+            <div class="containe">
+                <div class="register-content">
+                    <form class="for" method="post" style="width:700px" enctype="multipart/form-data">
+                        @for (int i = 0; i < Model.Shop.PhotoPaths.Count; i++)
+                        {
+                            <input class="form-control" type="hidden" asp-for="Shop.PhotoPaths[i].PhotoPath">
+                            <input class="form-control" type="hidden" asp-for="Shop.PhotoPaths[i]._id">
+                        }
+                        <input class="form-control" type="hidden" asp-for="Shop._id">
+                        <input class="form-control" type="hidden" asp-for="Shop.Coordinate.Latitude">
+                        <input class="form-control" type="hidden" asp-for="Shop.Coordinate.Longtitude">
+                        @for (int i = 0; i < Model.Shop.Products.Count; i++)
+                        {
+                            <input class="form-control" type="hidden" asp-for="Shop.Products[i].ProductType" placeholder="Product type">
+                            <input class="form-control" type="hidden" asp-for="Shop.Products[i].ProductPrice" placeholder="Product price">
+                        }
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-shopping-basket"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 style="top: -5px; font-size: 15px">Shop name</h5>
+                                        <input type="text" class="input" asp-for="@Model.Shop.ShopName" id="inputShopName">
+                                        <span asp-validation-for="Shop.ShopName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div input-di one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 style="top: -5px; font-size: 15px">Country</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.CountryName" asp-for="Shop.ShopAddress.CountryName" id="inputCountry">
+                                        <span asp-validation-for="Shop.ShopAddress.CountryName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 style="top: -5px; font-size: 15px">City name</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.CityName" asp-for="Shop.ShopAddress.CityName" id="inputCity">
+                                        <span asp-validation-for="Shop.ShopAddress.CityName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 style="top: -5px; font-size: 15px">Street name</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.StreetName" asp-for="Shop.ShopAddress.StreetName" id="inputStreetName" />
+                                        <span asp-validation-for="Shop.ShopAddress.StreetName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 style="top: -5px; font-size: 15px">Street number</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.StreetNumber" asp-for="Shop.ShopAddress.StreetNumber" id="inputStreetNumber">
+                                        <span asp-validation-for="Shop.ShopAddress.StreetNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5 style="top: -5px; font-size: 15px">Apartment number</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.ApartmentNumber" asp-for="Shop.ShopAddress.ApartmentNumber" id="inputApartmentNumber">
+                                        <span asp-validation-for="Shop.ShopAddress.ApartmentNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="float-md-right">
+                                <button type="submit" class="btn btn-add">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span style="margin-left: 7px">Save changes</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    </div>
+        <script type="text/javascript" src="/assets/js/loginmain.js"></script>
+    </div>
+</div>
+

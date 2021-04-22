@@ -1,0 +1,248 @@
+﻿@page
+@model Marcelena_web.Pages.AddPlaceModel
+@{
+    ViewData["Title"] = "Add new Place";
+}
+<head>
+    <link href="/assets/css/placestyle.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Add place</h2>
+                <ol>
+                    <li><a asp-page="/Home">Home</a></li>
+                    <li>Add place</li>
+                </ol>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <h1>@ViewData["confirmation"]</h1>
+    <div class="body-place">
+        <div style="text-align:center">
+            <div class="containe">
+                <div class="register-content">
+                    <form class="for" method="post" style="width:700px" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-shopping-basket"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5>Shop name</h5>
+                                        <input type="text" class="input" asp-for="@Model.Shop.ShopName" id="inputShopName">
+                                        <span asp-validation-for="Shop.ShopName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5>Country</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.CountryName" asp-for="Shop.ShopAddress.CountryName" id="inputCountry">
+                                        <span asp-validation-for="Shop.ShopAddress.CountryName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5>City name</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.CityName" asp-for="Shop.ShopAddress.CityName" id="inputCity">
+                                        <span asp-validation-for="Shop.ShopAddress.CityName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5>Street name</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.StreetName" asp-for="Shop.ShopAddress.StreetName" id="inputStreetName" />
+                                        <span asp-validation-for="Shop.ShopAddress.StreetName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5>Street number</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.StreetNumber" asp-for="Shop.ShopAddress.StreetNumber" id="inputStreetNumber">
+                                        <span asp-validation-for="Shop.ShopAddress.StreetNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="i">
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="div">
+                                        <h5>Apartment number</h5>
+                                        <input type="text" class="input" name="Shop.ShopAddress.ApartmentNumber" asp-for="Shop.ShopAddress.ApartmentNumber" id="inputApartmentNumber">
+                                        <span asp-validation-for="Shop.ShopAddress.ApartmentNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <div class="custom-file">
+                                    <input asp-for="Photo" class="custom-file-input form-control" id="files" type="file" multiple onchange="checkFiles(this.files)">
+
+                                    <label class="custom-file-label">Click here to change photo</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="partialContainer" style="width:700px">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="input-div one">
+                                        <div class="i">
+                                            <i class="fas fa-carrot"></i>
+                                        </div>
+                                        <div class="div">
+                                            <h5>Product type</h5>
+                                            <input type="text" class="input" name="Shop.Products[0].ProductType">
+                                            <span asp-validation-for="Shop.Products[0].ProductType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="input-div one">
+                                        <div class="i">
+                                            <i class="fas fa-euro-sign"></i>
+                                        </div>
+                                        <div class="div">
+                                            <h5>Product price</h5>
+                                            <input type="text" class="input" name="Shop.Products[0].ProductPrice">
+                                            <span asp-validation-for="Shop.Products[0].ProductPrice" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default" id="AddProductButton" aria-label="Left Align">
+                                <i class="fas fa-plus"></i><span style="margin-left: 7px">Add another product</span>
+                            </button>
+                            <div class="float-md-right">
+                                <button type="submit" class="btn btn-add">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span style="margin-left: 7px">Add new shop</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <script type="text/javascript" src="/assets/js/loginmain.js"></script>
+        </div>
+    </div>
+    <script>
+        var productsIndex = parseInt(0);
+
+        $("#AddProductButton").click(function () {
+            productsIndex++;
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "/AddPlace?handler=ProductsPartial",
+                data: {
+                    Index: productsIndex
+                },
+                success: function (data) {
+                    $("#partialContainer").append(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+            });
+        });</script>
+    @section Scripts {
+        <script>
+        function checkFiles(files) {
+            if (files.length > 4 ) {
+                alert("Max of 4 files can be added; files have been truncated");
+
+                let list = new DataTransfer;
+                for (let i = 0; i < 4 ; i++)
+                    list.items.add(files[i])
+
+                document.getElementById('files').files = list.files
+            }
+        }
+    $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });</script>
+        <script>
+            (function () {
+                function $id(id) {
+                    return document.getElementById(id);
+                }
+                function Output(msg) {
+                    var m = $id("messages");
+                    m.innerHTML = msg + m.innerHTML;
+                }
+                function FileDragHover(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    e.target.className = (e.type == "dragover" ? "hover" : "");
+                }
+                function FileSelectHandler(e) {
+                    FileDragHover(e);
+                    var files = e.target.files || e.dataTransfer.files;
+                    for (var i = 0, f; f = files[i]; i++) {
+                        ParseFile(f);
+                    }
+                }
+                function ParseFile(file) {
+                    Output(
+                        "<h5>" + file.name + "</h5>"
+                    );
+                }
+                function Init() {
+                    var fileselect = $id("fileselect"),
+                        filedrag = $id("filedrag"),
+                        submitbutton = $id("submitbutton");
+                    fileselect.classList.add("fileselect");
+                    fileselect.addEventListener("change", FileSelectHandler, false);
+                    var xhr = new XMLHttpRequest();
+                    if (xhr.upload) {
+                        filedrag.addEventListener("dragover", FileDragHover, false);
+                        filedrag.addEventListener("dragleave", FileDragHover, false);
+                        filedrag.addEventListener("drop", FileSelectHandler, false);
+                        filedrag.style.display = "block";
+                        submitbutton.style.display = "none";
+                    }
+                }
+                if (window.File && window.FileList && window.FileReader) {
+                    Init();
+                }
+            })();
+        </script>
+    }
+</main>

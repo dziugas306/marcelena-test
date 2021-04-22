@@ -1,0 +1,81 @@
+﻿@page "{id}"
+@model Marcelena_web.Pages.ReviewModel
+@{
+}
+<head>
+    <link href="/assets/css/accstyle.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Leave a review</h2>
+            <ol>
+                <li><a asp-page="/Home">Home</a></li>
+                <li><a asp-page="/Search/Index">Search</a></li>
+                <li><a href="~/Details/@Model.Shop._id">Shop</a></li>
+                <li><a>Leave a review</a></li>
+            </ol>
+        </div>
+    </div>
+</section><!-- End Breadcrumbs -->
+<body style="height: 700px;">
+    <img class="wave" src="/assets/img/vawe.png">
+    <div class="acc-body">
+        <div class="containe" style="height: 700px;">
+            <div class="fst-sctn" style="height: 400px; width: 700px;">
+                <div class="section-titl">
+                    <form class="for" method="post" style="width: 650px">
+                        <input class="form-control" type="hidden" asp-for="Shop._id">
+                        <input class="form-control" type="hidden" asp-for="Shop.ShopName">
+                        <input class="form-control" type="hidden" asp-for="Shop.ShopAddress.ApartmentNumber">
+                        <input class="form-control" type="hidden" asp-for="Shop.ShopAddress.CityName">
+                        <input class="form-control" type="hidden" asp-for="Shop.ShopAddress.CountryName">
+                        <input class="form-control" type="hidden" asp-for="Shop.ShopAddress.StreetName">
+                        <input class="form-control" type="hidden" asp-for="Shop.ShopAddress.StreetNumber">
+                        <input class="form-control" type="hidden" asp-for="Shop.Users">
+                        <input class="form-control" type="hidden" asp-for="Shop.Coordinate.Latitude">
+                        <input class="form-control" type="hidden" asp-for="Shop.Coordinate.Longtitude">
+                        <input class="form-control" type="hidden" asp-for="Shop.Products">
+                        <input class="form-control" type="hidden" asp-for="Shop.PhotoPaths">
+                        <input class="form-control" type="hidden" asp-for="Shop.Reviews">
+                        <input class="form-control" type="hidden" asp-for="currentUser.Id">
+                        <input class="form-control" type="hidden" asp-for="currentUser.UserName">
+                        <input class="form-control" type="hidden" asp-for="currentUser.NormalizedEmail">
+                        <input class="form-control" type="hidden" asp-for="currentUser.LockoutEnabled">
+                        <input class="form-control" type="hidden" asp-for="currentUser.Email">
+                        <input class="form-control" type="hidden" asp-for="currentUser.UserAddress">
+                        <h4>Review @Model.Shop.ShopName</h4>
+                        <h5>@Model.Shop.ShopAddress</h5>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="input-div one">
+                                    <div class="div">
+                                        <textarea type="text" class="input" asp-for="@Model.Review.Text" rows="4" cols="70"></textarea>
+                                        <span asp-validation-for="Review.Text" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="float-md-right" style="display: inline-block;">
+                                <button href="~/Details/@Model.Shop._id" style=" background-color: Transparent; border: none;">
+                                    <h5>Cancel</h5>
+                                </button>
+                                <button type="submit" class="btn btn-add">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span style="margin-left: 7px">Publish</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <script type="text/javascript" src="/assets/js/loginmain.js"></script>
+        </div>
+    </div>
+</body>
